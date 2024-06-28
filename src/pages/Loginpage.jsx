@@ -7,7 +7,7 @@ import clsx from "clsx"
 
 export default function LoginPage() {
     const navigate = useNavigate()
-    const [ showPassword, setShowPassword] = useState(false)
+
 
 const {
     handleSubmit,
@@ -19,6 +19,7 @@ const {
 async function onSubmit(data) {
     try {
         const token = await login(data.username, data.password)
+
         if(token){
             window.localStorage.setItem("token", token)
             toast.success("Bienvenido")
@@ -26,7 +27,15 @@ async function onSubmit(data) {
 
         }else {
             toast.error("Usuario o contrasena incorrectos")
-            setError("root.credentials", { type: "manual", message: "Credenciales invalidas"})
+            setError("root.credentials", { 
+                type: "manual", 
+                message: "Credenciales invalidas"
+            })
+//Abajdo seria para asignar un error al usuario, si se requiriera.
+            // setError("username", {
+            //     type: "manual",
+            //     message: "Usuario invalido"
+            // })
         }
     } catch (error) {
         toast.error("Error al iniciar sesion")
@@ -34,35 +43,29 @@ async function onSubmit(data) {
     }
 }
 
-function handleShowHidePassword (){
-    if (showPassword == true) {
-        setShowPassword(false)
-    }else {
-        setShowPassword(true)
-    }
 
-}
 
     return (
 
         <main className="flex justify-center items-center flex-col gap-4 w-full h-full">
-        <h1 className="text-4xl font-bold text-center">Login </h1>
+        <h1 className="text-4xl font-bold text-center" >Login</h1>
         <form
         onSubmit={handleSubmit(onSubmit)} 
-        className={clsx("border border-white/50 rounded p-4 flex flex-col gap-4 max-w-sm w-full", 
+        className={clsx(
+            "border border-white/50 rounded p-4 flex flex-col gap-4 max-w-sm w-full", 
             {
             "border-red-500": errors.root?.credentials,
-        }
+            }
     )}
         >
             <input type="text"
-            className="border border-white/50 rounded p-2" 
+            className="border border-white/50 rounded p-2 text-black" 
             placeholder="Nombre de usuario"
              { ...register("username", {
                 required: { value: true, message: "Nombre de usuario requerido"}
             })} />
-            <input type={ showPassword ? "text" : "password"}
-            className="border border-white/50 rounded p-2"
+            <input type="password"
+            className="border border-white/50 rounded p-2 text-black"
             placeholder="Contrasena"
             {...register("password", {
                 required: {
@@ -70,9 +73,7 @@ function handleShowHidePassword (){
                     message: "Contrasena requerida",
                 }
             })} />
-            <span 
-            onClick={handleShowHidePassword} > {showPassword ? "ocultar constrasena" : "👁️ mostrar constrasena"}  </span>
-
+   
             <button className="bg-teal-500 p-4 text-black hover:bg-teal-300">Ingresar</button>
             {errors.root?.credentials && (<p className="bg-red-500 text-center">Credenciales invalidas</p>) }
         </form>
