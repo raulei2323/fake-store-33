@@ -8,6 +8,7 @@ import './index.css'
 
 import LoginPage from "./pages/Loginpage"
 import HomePage from './pages/HomePage'
+import ProductsPage from "./pages/ProductsPage"
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/productos",
-    element: <p>Productos</p>
+    element: <ProductsPage />
   },
   {
     path: "/productos/:id",
