@@ -9,6 +9,7 @@ import './index.css'
 import LoginPage from "./pages/Loginpage"
 import HomePage from './pages/HomePage'
 import ProductsPage from "./pages/ProductsPage"
+import ProductDetailPage from './pages/ProductDetailPage'
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/productos/:id",
-    element: <p>Producto</p>
+    element: <ProductDetailPage />
   }
 ])
 
