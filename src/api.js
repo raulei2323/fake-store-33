@@ -27,3 +27,9 @@ export async function getProducts() {
 
   return json.products;
 }
+
+
+
+export async function getProduct(id) {
+  //TODO implement
+}
