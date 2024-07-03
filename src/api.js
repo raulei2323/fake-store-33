@@ -28,8 +28,12 @@ export async function getProducts() {
   return json.products;
 }
 
-
-
 export async function getProduct(id) {
-  //TODO implement
+  const token = localStorage.getItem("token")
+
+  const response = await fetch(`${API_URL}/products/${id}`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
+  }) 
+  return response.json()
 }
