@@ -2,8 +2,11 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom" 
 import { getProduct } from "../api"
 import { toast } from "sonner"
+import useAuth from "../hooks/useAuth"
 
 export default function ProductDetailPage () {
+    useAuth()
+    
     const { id } =useParams()
     const [ product, setProduct] = useState([])
 
